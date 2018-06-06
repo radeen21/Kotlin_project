@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.main_item.*
 /**
  * Created by Administrator on 5/28/2018.
  */
-class Holder(itemView: View?, var newsHolderListener: NewsHolderListener) : RecyclerView.ViewHolder(itemView) {
+class MainHolder(itemView: View?, var newsHolderListener: NewsHolderListener) : RecyclerView.ViewHolder(itemView) {
 
      var txt_main_holder : TextView? = null
      var context : Context? = null
@@ -24,7 +24,7 @@ class Holder(itemView: View?, var newsHolderListener: NewsHolderListener) : Recy
 
     fun setOnNewsView(news: News) {
         try {
-            txt_main_holder?.text = news.author
+            txt_main_holder?.text = news.title
         }catch (e : Exception){
             Log.d("Context", String.toString())
 

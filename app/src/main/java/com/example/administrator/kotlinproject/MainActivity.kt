@@ -7,10 +7,10 @@ import android.view.View
 import com.example.administrator.kotlinproject.adapter.MainAdapter
 import com.example.administrator.kotlinproject.model.Event
 import com.example.administrator.kotlinproject.model.News
-import com.example.administrator.kotlinproject.view.Holder
+import com.example.administrator.kotlinproject.view.MainHolder
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), IMainView, Holder.NewsHolderListener {
+class MainActivity : AppCompatActivity(), IMainView, MainHolder.NewsHolderListener {
 
     private val TAG = MainActivity::class.java!!.getSimpleName()
 

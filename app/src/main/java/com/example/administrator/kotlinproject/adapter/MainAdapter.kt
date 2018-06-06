@@ -5,36 +5,27 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.administrator.kotlinproject.R
 import com.example.administrator.kotlinproject.model.News
-import com.example.administrator.kotlinproject.view.Holder
-import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils
-import com.h6ah4i.android.widget.advrecyclerview.utils.RecyclerViewAdapterUtils.getViewHolder
-import java.util.ArrayList
+import com.example.administrator.kotlinproject.view.MainHolder
 
 /**
  * Created by Administrator on 5/28/2018.
  */
-class MainAdapter(val holdermain: Holder.NewsHolderListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class MainAdapter(val holdermain: MainHolder.NewsHolderListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var news: MutableList<News> = mutableListOf()
-
-//    fun MainAdapter(news : ArrayList<News>){
-//        this.news.addAll(news)
-//        this.news = news
-//    }
 
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerView.ViewHolder {
         var viewHolder: RecyclerView.ViewHolder? = null
         val layoutInflater = LayoutInflater.from(parent?.getContext())
 
-        viewHolder = getViewHolder(parent,layoutInflater)
+        viewHolder = getViewHolder(parent, layoutInflater)
         return viewHolder
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
-        if (holder is Holder) run {
+        holder?.let {
             val newses = news.get(position)
-            val newsViewHolder = holder
-            newsViewHolder.setOnNewsView(newses)
+            (holder as MainHolder).setOnNewsView(newses)
         }
     }
 
@@ -47,11 +38,11 @@ class MainAdapter(val holdermain: Holder.NewsHolderListener) : RecyclerView.Adap
         notifyDataSetChanged()
     }
 
-    private fun getViewHolder(parent: ViewGroup?, layoutInflater: LayoutInflater ): RecyclerView.ViewHolder {
+    private fun getViewHolder(parent: ViewGroup?, layoutInflater: LayoutInflater): MainHolder {
         val holderMain: RecyclerView.ViewHolder
         val view = layoutInflater.inflate(R.layout.main_item, parent, false)
 
-        holderMain = Holder(view, holdermain)
+        holderMain = MainHolder(view, holdermain)
 
         return holderMain
     }
