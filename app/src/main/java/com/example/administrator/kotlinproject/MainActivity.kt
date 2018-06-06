@@ -14,11 +14,11 @@ import java.security.AccessController.getContext
 
 class MainActivity : AppCompatActivity() , IMainView , Holder.NewsHolderListener {
 
-    private val TAG = MainActivity::class.java!!.getSimpleName()
+    private val TAG = MainActivity::class.java?.getSimpleName() ?:"MainActivity"
 
     lateinit var mainPresenter : MainPresenter
     lateinit var newsAdapter : MainAdapter
-    var listenerAdapter : LinearLayoutManager? = null
+    var llmanager : LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,10 +32,16 @@ class MainActivity : AppCompatActivity() , IMainView , Holder.NewsHolderListener
 
     fun initialize(){
         newsAdapter = MainAdapter(this)
+        llmanager = LinearLayoutManager(this)
 
-        recycler_main.layoutManager = listenerAdapter
-        recycler_main.setHasFixedSize(true)
-        recycler_main.adapter = newsAdapter
+        llmanager?.let {
+            recycler_main.apply {
+                layoutManager = llmanager
+                setHasFixedSize(true)
+                adapter = newsAdapter
+            }
+        }
+
     }
 
     override fun loadViewEvent(events: Event) {
