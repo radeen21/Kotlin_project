@@ -31,9 +31,11 @@ class MainActivity : AppCompatActivity(), IMainView, Holder.NewsHolderListener {
     fun initialize() {
         newsAdapter = MainAdapter(this)
         llManager = LinearLayoutManager(this)
-        recycler_main.layoutManager = llManager
-        recycler_main.setHasFixedSize(true)
-        recycler_main.adapter = newsAdapter
+        llManager?.let {
+            recycler_main.layoutManager = llManager
+            recycler_main.setHasFixedSize(true)
+            recycler_main.adapter = newsAdapter
+        }
     }
 
     override fun loadViewEvent(events: Event) {
