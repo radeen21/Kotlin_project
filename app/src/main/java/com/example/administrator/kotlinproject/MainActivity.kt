@@ -4,21 +4,19 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
-import com.bumptech.glide.Glide
 import com.example.administrator.kotlinproject.adapter.MainAdapter
 import com.example.administrator.kotlinproject.model.Event
 import com.example.administrator.kotlinproject.model.News
-import com.example.administrator.kotlinproject.view.Holder
+import com.example.administrator.kotlinproject.view.MainHolder
 import kotlinx.android.synthetic.main.activity_main.*
-import java.security.AccessController.getContext
 
-class MainActivity : AppCompatActivity() , IMainView , Holder.NewsHolderListener {
+class MainActivity : AppCompatActivity(), IMainView, MainHolder.NewsHolderListener {
 
     private val TAG = MainActivity::class.java!!.getSimpleName()
 
-    lateinit var mainPresenter : MainPresenter
-    lateinit var newsAdapter : MainAdapter
-    var listenerAdapter : LinearLayoutManager? = null
+    lateinit var mainPresenter: MainPresenter
+    lateinit var newsAdapter: MainAdapter
+    var llManager: LinearLayoutManager? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,12 +28,14 @@ class MainActivity : AppCompatActivity() , IMainView , Holder.NewsHolderListener
         initialize()
     }
 
-    fun initialize(){
+    fun initialize() {
         newsAdapter = MainAdapter(this)
-
-        recycler_main.layoutManager = listenerAdapter
-        recycler_main.setHasFixedSize(true)
-        recycler_main.adapter = newsAdapter
+        llManager = LinearLayoutManager(this)
+        llManager?.let {
+            recycler_main.layoutManager = llManager
+            recycler_main.setHasFixedSize(true)
+            recycler_main.adapter = newsAdapter
+        }
     }
 
     override fun loadViewEvent(events: Event) {
